@@ -22,12 +22,12 @@
 
 | Role | Name | Enrollment No. | GitHub Username |
 |------|------|----------------|-----------------|
-| Group Lead | | | |
-| Member 2 | | | |
-| Member 3 | | | |
-| Member 4 | | | |
+| Group Lead |Aryan Rai | 2501010093 |Aryan68798 |
+| Member 2 |Satyam Singh Rajput |2501010412 |satyamsinghvishen |
+| Member 3 |Angel Rahar |2501010055 |raharangel |
+| Member 4 |Arpita Bharti |2501010087 |arpitabharti049 |
 
-**Team No.:** ____ · **Section:** ____ · **Repository URL:** ____
+**Team No.:** T0074 · **Section:** E · **Repository URL:** Aryan68798/DE_Project_2026
 
 ---
 

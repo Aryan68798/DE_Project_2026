@@ -1,0 +1,27 @@
+{
+    "team_number": "T0074",
+    "group_lead": {
+        "name": "Aryan Rai",
+        "enrollment_no": "2501010093",
+        "github": "Aryan68798"
+    },
+    "members": [
+        {
+            "name": "Satyam Singh Rajput",
+            "enrollment_no": "2501010412",
+            "github": "satyamsinghvishen"
+        },
+        {
+            "name": "Angel Rahar",
+            "enrollment_no": "2501010055",
+            "github": "raharangel"
+        },
+        {
+            "name": "Arpita Bharti",
+            "enrollment_no": "2501010087",
+            "github": "arpitabharti049"
+        }
+    ],
+    "postgres_version": "18.6",
+    "laptop_used_for_benchmarks": "MacBook Pro M4"
+}
