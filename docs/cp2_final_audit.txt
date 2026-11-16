@@ -1,0 +1,36 @@
+===== ROW COUNTS =====
+     table_name     | count  
+--------------------+--------
+ services           |     60
+ cities             |     10
+ service_categories |     10
+ professionals      |   2500
+ pro_skills         |   5000
+ reschedules        |   5391
+ payouts            |  27015
+ customers          |  40000
+ pro_availability   |  70407
+ reviews            |  76539
+ bookings           | 150000
+(11 rows)
+
+===== CONSTRAINT COUNTS =====
+ contype | count 
+---------+-------
+ c       |    24
+ f       |    13
+ p       |    11
+ u       |     1
+(4 rows)
+
+===== GIT STATUS =====
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	docs/03_normalization.md
+	docs/constraint_audit.txt
+	docs/cp2_final_audit.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
