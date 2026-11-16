@@ -1,0 +1,6 @@
+-- Urban Company DBMS Project
+-- Team: T0074
+-- Section: E
+-- Database: urban_company_db
+-- PostgreSQL: 16.16
+-- Phase 2: Schema design
