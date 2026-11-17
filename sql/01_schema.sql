@@ -103,8 +103,9 @@ CREATE TABLE bookings (
         )
     ),
     price NUMERIC(10,2) NOT NULL CHECK (price >= 0),
-    discount NUMERIC(10,2) NOT NULL CHECK (discount >= 0),
-    cancellation_fee NUMERIC(10,2) NOT NULL
+    -- DEFAULT 0: a new booking (W01) has no discount and no cancellation fee yet
+    discount NUMERIC(10,2) NOT NULL DEFAULT 0 CHECK (discount >= 0),
+    cancellation_fee NUMERIC(10,2) NOT NULL DEFAULT 0
         CHECK (cancellation_fee >= 0),
     tip NUMERIC(10,2) CHECK (tip IS NULL OR tip >= 0),
     payment_method VARCHAR(20) NOT NULL
