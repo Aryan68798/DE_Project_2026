@@ -1,0 +1,27 @@
+=== R06 run 1 ===
+Seq Scan on customers  (cost=0.00..964.00 rows=1 width=24) (actual time=0.037..1.292 rows=1.00 loops=1)
+  Filter: ((phone)::text = '9100001042'::text)
+  Rows Removed by Filter: 39999
+  Buffers: shared hit=464
+Planning:
+  Buffers: shared hit=72
+Planning Time: 0.146 ms
+Execution Time: 1.305 ms
+=== R06 run 2 ===
+Seq Scan on customers  (cost=0.00..964.00 rows=1 width=24) (actual time=0.037..1.306 rows=1.00 loops=1)
+  Filter: ((phone)::text = '9100001042'::text)
+  Rows Removed by Filter: 39999
+  Buffers: shared hit=464
+Planning:
+  Buffers: shared hit=72
+Planning Time: 0.131 ms
+Execution Time: 1.319 ms
+=== R06 run 3 ===
+Seq Scan on customers  (cost=0.00..964.00 rows=1 width=24) (actual time=0.039..1.258 rows=1.00 loops=1)
+  Filter: ((phone)::text = '9100001042'::text)
+  Rows Removed by Filter: 39999
+  Buffers: shared hit=464
+Planning:
+  Buffers: shared hit=72
+Planning Time: 0.121 ms
+Execution Time: 1.271 ms
