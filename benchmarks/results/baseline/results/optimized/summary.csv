@@ -1,0 +1,31 @@
+query_id,type,avg_ms,median_ms,min_ms,max_ms,scan_nodes
+R01,READ,0.048,0.047,0.043,0.055,Seq Scan on services | Seq Scan on service_categories
+R02,READ,0.986,0.938,0.927,1.138,Seq Scan on pro_skills | Bitmap Heap Scan on professionals | Bitmap Index Scan on ix_professionals_city_status | Seq Scan on service_categories | Index Scan using pro_availability_pkey on pro_availability | Index Only Scan using ix_bookings_pro_start on bookings
+R03,READ,0.056,0.053,0.048,0.074,Seq Scan on services | Index Scan using ix_bookings_customer_start on bookings | Index Scan using professionals_pkey on professionals
+R04,READ,0.049,0.044,0.043,0.068,Seq Scan on services | Index Scan using ix_bookings_pro_start on bookings
+R05,READ,0.032,0.028,0.027,0.047,Index Scan using ix_bookings_requested_start on bookings
+R06,READ,0.025,0.022,0.022,0.035,Index Scan using ix_customers_phone on customers
+R07,READ,0.055,0.050,0.048,0.075,Index Only Scan using ix_bookings_pro_completed on bookings
+R08,READ,0.529,0.520,0.510,0.573,Seq Scan on professionals | Index Scan using ix_payouts_pending_week on payouts
+R09,READ,1.619,1.597,1.571,1.725,Index Only Scan using ix_bookings_completed_start on bookings | Seq Scan on services | Seq Scan on service_categories
+R10,READ,16.861,16.882,16.599,17.211,Seq Scan on bookings
+R11,READ,0.450,0.441,0.428,0.489,Index Only Scan using ix_reschedules_created on reschedules | Index Scan using bookings_pkey on bookings | Index Scan using services_pkey on services
+R12,READ,0.846,0.846,0.829,0.863,Index Only Scan using ix_bookings_discount_booked on bookings
+R13,READ,0.555,0.542,0.531,0.582,Index Scan using professionals_pkey on professionals | Index Only Scan using ix_bookings_cust_cancel_pro on bookings
+R14,READ,13.482,13.518,13.171,13.662,Index Only Scan using ix_bookings_city_booked on bookings | Seq Scan on services
+R15,READ,9.882,9.964,9.481,10.250,Seq Scan on bookings | Index Scan using ix_reviews_created on reviews
+R16,READ,0.168,0.167,0.160,0.184,Index Only Scan using ix_bookings_city_booked on bookings
+R17,READ,8.294,8.140,7.987,8.763,Index Only Scan using ix_bookings_completed_booked on bookings | Seq Scan on services
+R18,READ,0.169,0.168,0.164,0.178,Index Scan using ix_reviews_created on reviews
+R19,READ,1.828,1.683,1.574,2.572,Bitmap Heap Scan on professionals | Bitmap Index Scan on ix_professionals_city_status | Index Only Scan using ix_bookings_pro_start on bookings | Index Only Scan using ix_bookings_pro_completed on bookings
+R20,READ,1.147,1.149,1.141,1.155,Index Only Scan using ix_bookings_completed_start on bookings
+R21,READ,13.258,13.228,13.008,13.611,Seq Scan on bookings | Seq Scan on services | Seq Scan on pro_skills
+R22,READ,5.985,5.908,5.710,6.526,Index Only Scan using ix_bookings_booked_desc on bookings
+R23,READ,0.043,0.042,0.037,0.048,Seq Scan on services | Index Scan using bookings_pkey on bookings
+R24,READ,0.241,0.230,0.227,0.271,Index Only Scan using ix_bookings_fee_start on bookings
+R25,READ,2.778,2.790,2.672,2.822,Bitmap Heap Scan on pro_availability | Bitmap Index Scan on ix_pro_availability_date | Bitmap Heap Scan on professionals | Bitmap Index Scan on ix_professionals_city_status | Index Only Scan using ix_bookings_pro_start on bookings
+W01,WRITE,0.786,0.706,0.657,1.187,(no scan)
+W02,WRITE,0.418,0.423,0.371,0.446,Index Only Scan using ix_bookings_requested_id on bookings | Index Scan using bookings_pkey on bookings
+W03,WRITE,0.216,0.217,0.204,0.227,Index Scan using ix_bookings_pro_start on bookings
+W04,WRITE,2.300,2.299,2.241,2.361,Index Only Scan using ix_bookings_completed_at on bookings
+W05,WRITE,2.007,1.993,1.787,2.392,Index Scan using ix_bookings_assigned_end on bookings

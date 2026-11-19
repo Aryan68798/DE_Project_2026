@@ -1,0 +1,135 @@
+=== R15 run 1 ===
+Sort  (cost=4764.28..4764.89 rows=245 width=44) (actual time=10.066..10.068 rows=86.00 loops=1)
+  Sort Key: (round(avg(r.rating_for_pro), 2))
+  Sort Method: quicksort  Memory: 28kB
+  Buffers: shared hit=6059 read=18
+  ->  HashAggregate  (cost=4715.34..4754.56 rows=245 width=44) (actual time=9.899..10.049 rows=86.00 loops=1)
+        Group Key: b.pro_id
+        Filter: ((count(*) >= 5) AND (avg(r.rating_for_pro) < 4.0))
+        Batches: 1  Memory Usage: 337kB
+        Rows Removed by Filter: 1623
+        Buffers: shared hit=6056 read=18
+        ->  Hash Join  (cost=239.57..4684.34 rows=4134 width=6) (actual time=8.738..9.562 rows=4265.00 loops=1)
+              Hash Cond: (b.booking_id = r.booking_id)
+              Buffers: shared hit=6056 read=18
+              ->  Seq Scan on bookings b  (cost=0.00..4051.00 rows=150000 width=12) (actual time=0.002..3.907 rows=150000.00 loops=1)
+                    Buffers: shared hit=2551
+              ->  Hash  (cost=187.90..187.90 rows=4134 width=10) (actual time=0.637..0.637 rows=4265.00 loops=1)
+                    Buckets: 8192  Batches: 1  Memory Usage: 264kB
+                    Buffers: shared hit=3505 read=18
+                    ->  Index Scan using ix_reviews_created on reviews r  (cost=0.42..187.90 rows=4134 width=10) (actual time=0.016..0.479 rows=4265.00 loops=1)
+                          Index Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                          Index Searches: 1
+                          Buffers: shared hit=3505 read=18
+Planning:
+  Buffers: shared hit=577 read=4
+Planning Time: 1.052 ms
+Execution Time: 10.106 ms
+=== R15 run 2 ===
+Sort  (cost=4764.28..4764.89 rows=245 width=44) (actual time=10.213..10.215 rows=86.00 loops=1)
+  Sort Key: (round(avg(r.rating_for_pro), 2))
+  Sort Method: quicksort  Memory: 28kB
+  Buffers: shared hit=6077
+  ->  HashAggregate  (cost=4715.34..4754.56 rows=245 width=44) (actual time=10.047..10.198 rows=86.00 loops=1)
+        Group Key: b.pro_id
+        Filter: ((count(*) >= 5) AND (avg(r.rating_for_pro) < 4.0))
+        Batches: 1  Memory Usage: 337kB
+        Rows Removed by Filter: 1623
+        Buffers: shared hit=6074
+        ->  Hash Join  (cost=239.57..4684.34 rows=4134 width=6) (actual time=8.880..9.709 rows=4265.00 loops=1)
+              Hash Cond: (b.booking_id = r.booking_id)
+              Buffers: shared hit=6074
+              ->  Seq Scan on bookings b  (cost=0.00..4051.00 rows=150000 width=12) (actual time=0.002..3.734 rows=150000.00 loops=1)
+                    Buffers: shared hit=2551
+              ->  Hash  (cost=187.90..187.90 rows=4134 width=10) (actual time=0.605..0.605 rows=4265.00 loops=1)
+                    Buckets: 8192  Batches: 1  Memory Usage: 264kB
+                    Buffers: shared hit=3523
+                    ->  Index Scan using ix_reviews_created on reviews r  (cost=0.42..187.90 rows=4134 width=10) (actual time=0.007..0.431 rows=4265.00 loops=1)
+                          Index Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                          Index Searches: 1
+                          Buffers: shared hit=3523
+Planning:
+  Buffers: shared hit=581
+Planning Time: 0.691 ms
+Execution Time: 10.250 ms
+=== R15 run 3 ===
+Sort  (cost=4764.28..4764.89 rows=245 width=44) (actual time=9.925..9.927 rows=86.00 loops=1)
+  Sort Key: (round(avg(r.rating_for_pro), 2))
+  Sort Method: quicksort  Memory: 28kB
+  Buffers: shared hit=6077
+  ->  HashAggregate  (cost=4715.34..4754.56 rows=245 width=44) (actual time=9.759..9.910 rows=86.00 loops=1)
+        Group Key: b.pro_id
+        Filter: ((count(*) >= 5) AND (avg(r.rating_for_pro) < 4.0))
+        Batches: 1  Memory Usage: 337kB
+        Rows Removed by Filter: 1623
+        Buffers: shared hit=6074
+        ->  Hash Join  (cost=239.57..4684.34 rows=4134 width=6) (actual time=8.593..9.418 rows=4265.00 loops=1)
+              Hash Cond: (b.booking_id = r.booking_id)
+              Buffers: shared hit=6074
+              ->  Seq Scan on bookings b  (cost=0.00..4051.00 rows=150000 width=12) (actual time=0.002..3.911 rows=150000.00 loops=1)
+                    Buffers: shared hit=2551
+              ->  Hash  (cost=187.90..187.90 rows=4134 width=10) (actual time=0.606..0.606 rows=4265.00 loops=1)
+                    Buckets: 8192  Batches: 1  Memory Usage: 264kB
+                    Buffers: shared hit=3523
+                    ->  Index Scan using ix_reviews_created on reviews r  (cost=0.42..187.90 rows=4134 width=10) (actual time=0.008..0.439 rows=4265.00 loops=1)
+                          Index Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                          Index Searches: 1
+                          Buffers: shared hit=3523
+Planning:
+  Buffers: shared hit=581
+Planning Time: 0.713 ms
+Execution Time: 9.964 ms
+=== R15 run 4 ===
+Sort  (cost=4764.28..4764.89 rows=245 width=44) (actual time=9.444..9.446 rows=86.00 loops=1)
+  Sort Key: (round(avg(r.rating_for_pro), 2))
+  Sort Method: quicksort  Memory: 28kB
+  Buffers: shared hit=6077
+  ->  HashAggregate  (cost=4715.34..4754.56 rows=245 width=44) (actual time=9.275..9.430 rows=86.00 loops=1)
+        Group Key: b.pro_id
+        Filter: ((count(*) >= 5) AND (avg(r.rating_for_pro) < 4.0))
+        Batches: 1  Memory Usage: 337kB
+        Rows Removed by Filter: 1623
+        Buffers: shared hit=6074
+        ->  Hash Join  (cost=239.57..4684.34 rows=4134 width=6) (actual time=8.156..8.951 rows=4265.00 loops=1)
+              Hash Cond: (b.booking_id = r.booking_id)
+              Buffers: shared hit=6074
+              ->  Seq Scan on bookings b  (cost=0.00..4051.00 rows=150000 width=12) (actual time=0.002..3.678 rows=150000.00 loops=1)
+                    Buffers: shared hit=2551
+              ->  Hash  (cost=187.90..187.90 rows=4134 width=10) (actual time=0.588..0.589 rows=4265.00 loops=1)
+                    Buckets: 8192  Batches: 1  Memory Usage: 264kB
+                    Buffers: shared hit=3523
+                    ->  Index Scan using ix_reviews_created on reviews r  (cost=0.42..187.90 rows=4134 width=10) (actual time=0.007..0.433 rows=4265.00 loops=1)
+                          Index Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                          Index Searches: 1
+                          Buffers: shared hit=3523
+Planning:
+  Buffers: shared hit=581
+Planning Time: 0.711 ms
+Execution Time: 9.481 ms
+=== R15 run 5 ===
+Sort  (cost=4764.28..4764.89 rows=245 width=44) (actual time=9.573..9.575 rows=86.00 loops=1)
+  Sort Key: (round(avg(r.rating_for_pro), 2))
+  Sort Method: quicksort  Memory: 28kB
+  Buffers: shared hit=6077
+  ->  HashAggregate  (cost=4715.34..4754.56 rows=245 width=44) (actual time=9.391..9.557 rows=86.00 loops=1)
+        Group Key: b.pro_id
+        Filter: ((count(*) >= 5) AND (avg(r.rating_for_pro) < 4.0))
+        Batches: 1  Memory Usage: 337kB
+        Rows Removed by Filter: 1623
+        Buffers: shared hit=6074
+        ->  Hash Join  (cost=239.57..4684.34 rows=4134 width=6) (actual time=8.234..9.043 rows=4265.00 loops=1)
+              Hash Cond: (b.booking_id = r.booking_id)
+              Buffers: shared hit=6074
+              ->  Seq Scan on bookings b  (cost=0.00..4051.00 rows=150000 width=12) (actual time=0.002..3.763 rows=150000.00 loops=1)
+                    Buffers: shared hit=2551
+              ->  Hash  (cost=187.90..187.90 rows=4134 width=10) (actual time=0.600..0.600 rows=4265.00 loops=1)
+                    Buckets: 8192  Batches: 1  Memory Usage: 264kB
+                    Buffers: shared hit=3523
+                    ->  Index Scan using ix_reviews_created on reviews r  (cost=0.42..187.90 rows=4134 width=10) (actual time=0.008..0.430 rows=4265.00 loops=1)
+                          Index Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                          Index Searches: 1
+                          Buffers: shared hit=3523
+Planning:
+  Buffers: shared hit=581
+Planning Time: 0.705 ms
+Execution Time: 9.610 ms

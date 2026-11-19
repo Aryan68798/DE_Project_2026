@@ -1,0 +1,190 @@
+=== R19 run 1 ===
+Sort  (cost=1851.66..1852.55 rows=355 width=32) (actual time=2.530..2.539 rows=357.00 loops=1)
+  Sort Key: ((SubPlan 1)) DESC
+  Sort Method: quicksort  Memory: 42kB
+  Buffers: shared hit=1562 read=620
+  ->  Bitmap Heap Scan on professionals p  (cost=7.92..1836.62 rows=355 width=32) (actual time=0.059..2.489 rows=357.00 loops=1)
+        Recheck Cond: ((city_id = 1) AND ((status)::text = 'ACTIVE'::text))
+        Heap Blocks: exact=27
+        Buffers: shared hit=1559 read=620
+        ->  Bitmap Index Scan on ix_professionals_city_status  (cost=0.00..7.83 rows=355 width=0) (actual time=0.009..0.009 rows=357.00 loops=1)
+              Index Cond: ((city_id = 1) AND ((status)::text = 'ACTIVE'::text))
+              Index Searches: 1
+              Buffers: shared hit=2
+        SubPlan 1
+          ->  Aggregate  (cost=4.53..4.54 rows=1 width=8) (actual time=0.003..0.003 rows=1.00 loops=357)
+                Buffers: shared hit=816 read=262
+                ->  Index Only Scan using ix_bookings_pro_start on bookings b  (cost=0.42..4.52 rows=3 width=0) (actual time=0.003..0.003 rows=3.41 loops=357)
+                      Index Cond: ((pro_id = p.pro_id) AND (scheduled_start >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                      Filter: ((status)::text = 'COMPLETED'::text)
+                      Rows Removed by Filter: 0
+                      Heap Fetches: 0
+                      Index Searches: 357
+                      Buffers: shared hit=816 read=262
+        SubPlan 3
+          ->  Result  (cost=0.51..0.52 rows=1 width=8) (actual time=0.004..0.004 rows=1.00 loops=357)
+                Buffers: shared hit=714 read=358
+                InitPlan 2
+                  ->  Limit  (cost=0.42..0.51 rows=1 width=8) (actual time=0.003..0.004 rows=1.00 loops=357)
+                        Buffers: shared hit=714 read=358
+                        ->  Index Only Scan Backward using ix_bookings_pro_completed on bookings b_1  (cost=0.42..5.52 rows=55 width=8) (actual time=0.003..0.003 rows=1.00 loops=357)
+                              Index Cond: ((pro_id = p.pro_id) AND (completed_at IS NOT NULL))
+                              Heap Fetches: 0
+                              Index Searches: 357
+                              Buffers: shared hit=714 read=358
+Planning:
+  Buffers: shared hit=467
+Planning Time: 0.650 ms
+Execution Time: 2.572 ms
+=== R19 run 2 ===
+Sort  (cost=1851.66..1852.55 rows=355 width=32) (actual time=1.537..1.543 rows=357.00 loops=1)
+  Sort Key: ((SubPlan 1)) DESC
+  Sort Method: quicksort  Memory: 42kB
+  Buffers: shared hit=2182
+  ->  Bitmap Heap Scan on professionals p  (cost=7.92..1836.62 rows=355 width=32) (actual time=0.048..1.505 rows=357.00 loops=1)
+        Recheck Cond: ((city_id = 1) AND ((status)::text = 'ACTIVE'::text))
+        Heap Blocks: exact=27
+        Buffers: shared hit=2179
+        ->  Bitmap Index Scan on ix_professionals_city_status  (cost=0.00..7.83 rows=355 width=0) (actual time=0.009..0.009 rows=357.00 loops=1)
+              Index Cond: ((city_id = 1) AND ((status)::text = 'ACTIVE'::text))
+              Index Searches: 1
+              Buffers: shared hit=2
+        SubPlan 1
+          ->  Aggregate  (cost=4.53..4.54 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                Buffers: shared hit=1078
+                ->  Index Only Scan using ix_bookings_pro_start on bookings b  (cost=0.42..4.52 rows=3 width=0) (actual time=0.001..0.002 rows=3.41 loops=357)
+                      Index Cond: ((pro_id = p.pro_id) AND (scheduled_start >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                      Filter: ((status)::text = 'COMPLETED'::text)
+                      Rows Removed by Filter: 0
+                      Heap Fetches: 0
+                      Index Searches: 357
+                      Buffers: shared hit=1078
+        SubPlan 3
+          ->  Result  (cost=0.51..0.52 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                Buffers: shared hit=1072
+                InitPlan 2
+                  ->  Limit  (cost=0.42..0.51 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                        Buffers: shared hit=1072
+                        ->  Index Only Scan Backward using ix_bookings_pro_completed on bookings b_1  (cost=0.42..5.52 rows=55 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                              Index Cond: ((pro_id = p.pro_id) AND (completed_at IS NOT NULL))
+                              Heap Fetches: 0
+                              Index Searches: 357
+                              Buffers: shared hit=1072
+Planning:
+  Buffers: shared hit=467
+Planning Time: 0.635 ms
+Execution Time: 1.574 ms
+=== R19 run 3 ===
+Sort  (cost=1851.66..1852.55 rows=355 width=32) (actual time=1.652..1.661 rows=357.00 loops=1)
+  Sort Key: ((SubPlan 1)) DESC
+  Sort Method: quicksort  Memory: 42kB
+  Buffers: shared hit=2182
+  ->  Bitmap Heap Scan on professionals p  (cost=7.92..1836.62 rows=355 width=32) (actual time=0.050..1.619 rows=357.00 loops=1)
+        Recheck Cond: ((city_id = 1) AND ((status)::text = 'ACTIVE'::text))
+        Heap Blocks: exact=27
+        Buffers: shared hit=2179
+        ->  Bitmap Index Scan on ix_professionals_city_status  (cost=0.00..7.83 rows=355 width=0) (actual time=0.009..0.009 rows=357.00 loops=1)
+              Index Cond: ((city_id = 1) AND ((status)::text = 'ACTIVE'::text))
+              Index Searches: 1
+              Buffers: shared hit=2
+        SubPlan 1
+          ->  Aggregate  (cost=4.53..4.54 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                Buffers: shared hit=1078
+                ->  Index Only Scan using ix_bookings_pro_start on bookings b  (cost=0.42..4.52 rows=3 width=0) (actual time=0.002..0.002 rows=3.41 loops=357)
+                      Index Cond: ((pro_id = p.pro_id) AND (scheduled_start >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                      Filter: ((status)::text = 'COMPLETED'::text)
+                      Rows Removed by Filter: 0
+                      Heap Fetches: 0
+                      Index Searches: 357
+                      Buffers: shared hit=1078
+        SubPlan 3
+          ->  Result  (cost=0.51..0.52 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                Buffers: shared hit=1072
+                InitPlan 2
+                  ->  Limit  (cost=0.42..0.51 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                        Buffers: shared hit=1072
+                        ->  Index Only Scan Backward using ix_bookings_pro_completed on bookings b_1  (cost=0.42..5.52 rows=55 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                              Index Cond: ((pro_id = p.pro_id) AND (completed_at IS NOT NULL))
+                              Heap Fetches: 0
+                              Index Searches: 357
+                              Buffers: shared hit=1072
+Planning:
+  Buffers: shared hit=467
+Planning Time: 0.688 ms
+Execution Time: 1.694 ms
+=== R19 run 4 ===
+Sort  (cost=1851.66..1852.55 rows=355 width=32) (actual time=1.642..1.650 rows=357.00 loops=1)
+  Sort Key: ((SubPlan 1)) DESC
+  Sort Method: quicksort  Memory: 42kB
+  Buffers: shared hit=2182
+  ->  Bitmap Heap Scan on professionals p  (cost=7.92..1836.62 rows=355 width=32) (actual time=0.051..1.610 rows=357.00 loops=1)
+        Recheck Cond: ((city_id = 1) AND ((status)::text = 'ACTIVE'::text))
+        Heap Blocks: exact=27
+        Buffers: shared hit=2179
+        ->  Bitmap Index Scan on ix_professionals_city_status  (cost=0.00..7.83 rows=355 width=0) (actual time=0.010..0.010 rows=357.00 loops=1)
+              Index Cond: ((city_id = 1) AND ((status)::text = 'ACTIVE'::text))
+              Index Searches: 1
+              Buffers: shared hit=2
+        SubPlan 1
+          ->  Aggregate  (cost=4.53..4.54 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                Buffers: shared hit=1078
+                ->  Index Only Scan using ix_bookings_pro_start on bookings b  (cost=0.42..4.52 rows=3 width=0) (actual time=0.002..0.002 rows=3.41 loops=357)
+                      Index Cond: ((pro_id = p.pro_id) AND (scheduled_start >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                      Filter: ((status)::text = 'COMPLETED'::text)
+                      Rows Removed by Filter: 0
+                      Heap Fetches: 0
+                      Index Searches: 357
+                      Buffers: shared hit=1078
+        SubPlan 3
+          ->  Result  (cost=0.51..0.52 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                Buffers: shared hit=1072
+                InitPlan 2
+                  ->  Limit  (cost=0.42..0.51 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                        Buffers: shared hit=1072
+                        ->  Index Only Scan Backward using ix_bookings_pro_completed on bookings b_1  (cost=0.42..5.52 rows=55 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                              Index Cond: ((pro_id = p.pro_id) AND (completed_at IS NOT NULL))
+                              Heap Fetches: 0
+                              Index Searches: 357
+                              Buffers: shared hit=1072
+Planning:
+  Buffers: shared hit=467
+Planning Time: 0.664 ms
+Execution Time: 1.683 ms
+=== R19 run 5 ===
+Sort  (cost=1851.66..1852.55 rows=355 width=32) (actual time=1.578..1.584 rows=357.00 loops=1)
+  Sort Key: ((SubPlan 1)) DESC
+  Sort Method: quicksort  Memory: 42kB
+  Buffers: shared hit=2182
+  ->  Bitmap Heap Scan on professionals p  (cost=7.92..1836.62 rows=355 width=32) (actual time=0.051..1.539 rows=357.00 loops=1)
+        Recheck Cond: ((city_id = 1) AND ((status)::text = 'ACTIVE'::text))
+        Heap Blocks: exact=27
+        Buffers: shared hit=2179
+        ->  Bitmap Index Scan on ix_professionals_city_status  (cost=0.00..7.83 rows=355 width=0) (actual time=0.010..0.010 rows=357.00 loops=1)
+              Index Cond: ((city_id = 1) AND ((status)::text = 'ACTIVE'::text))
+              Index Searches: 1
+              Buffers: shared hit=2
+        SubPlan 1
+          ->  Aggregate  (cost=4.53..4.54 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                Buffers: shared hit=1078
+                ->  Index Only Scan using ix_bookings_pro_start on bookings b  (cost=0.42..4.52 rows=3 width=0) (actual time=0.001..0.002 rows=3.41 loops=357)
+                      Index Cond: ((pro_id = p.pro_id) AND (scheduled_start >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                      Filter: ((status)::text = 'COMPLETED'::text)
+                      Rows Removed by Filter: 0
+                      Heap Fetches: 0
+                      Index Searches: 357
+                      Buffers: shared hit=1078
+        SubPlan 3
+          ->  Result  (cost=0.51..0.52 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                Buffers: shared hit=1072
+                InitPlan 2
+                  ->  Limit  (cost=0.42..0.51 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                        Buffers: shared hit=1072
+                        ->  Index Only Scan Backward using ix_bookings_pro_completed on bookings b_1  (cost=0.42..5.52 rows=55 width=8) (actual time=0.002..0.002 rows=1.00 loops=357)
+                              Index Cond: ((pro_id = p.pro_id) AND (completed_at IS NOT NULL))
+                              Heap Fetches: 0
+                              Index Searches: 357
+                              Buffers: shared hit=1072
+Planning:
+  Buffers: shared hit=467
+Planning Time: 0.691 ms
+Execution Time: 1.616 ms
