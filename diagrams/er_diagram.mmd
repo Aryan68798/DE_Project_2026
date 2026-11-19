@@ -1,5 +1,4 @@
-touch docs/02_schema_design.md
-code docs/02_schema_design.mdfind sql docs diagrams -maxdepth 2 -type ferDiagram
+erDiagram
     CITIES ||--o{ PROFESSIONALS : has
     CITIES ||--o{ CUSTOMERS : has
     CITIES ||--o{ BOOKINGS : serves
@@ -83,6 +82,8 @@ code docs/02_schema_design.mdfind sql docs diagrams -maxdepth 2 -type ferDiagram
         timestamptz booked_at
         timestamptz scheduled_start
         timestamptz scheduled_end
+        timestamptz started_at
+        timestamptz completed_at
         varchar status
         numeric price
         numeric discount
