@@ -1,0 +1,110 @@
+=== R20 run 1 ===
+WindowAgg  (cost=804.65..900.08 rows=5454 width=68) (actual time=1.097..1.104 rows=30.00 loops=1)
+  Window: w1 AS (ORDER BY ((bookings.scheduled_start)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=51
+  ->  Sort  (cost=804.63..818.27 rows=5454 width=36) (actual time=1.093..1.094 rows=30.00 loops=1)
+        Sort Key: ((bookings.scheduled_start)::date)
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=51
+        ->  HashAggregate  (cost=384.32..466.13 rows=5454 width=36) (actual time=1.070..1.087 rows=30.00 loops=1)
+              Group Key: (bookings.scheduled_start)::date
+              Batches: 1  Memory Usage: 169kB
+              Buffers: shared hit=48
+              ->  Index Only Scan using ix_bookings_completed_start on bookings  (cost=0.42..332.34 rows=6930 width=12) (actual time=0.025..0.536 rows=7111.00 loops=1)
+                    Index Cond: ((scheduled_start >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=48
+Planning:
+  Buffers: shared hit=458
+Planning Time: 0.596 ms
+Execution Time: 1.141 ms
+=== R20 run 2 ===
+WindowAgg  (cost=804.65..900.08 rows=5454 width=68) (actual time=1.106..1.113 rows=30.00 loops=1)
+  Window: w1 AS (ORDER BY ((bookings.scheduled_start)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=51
+  ->  Sort  (cost=804.63..818.27 rows=5454 width=36) (actual time=1.102..1.103 rows=30.00 loops=1)
+        Sort Key: ((bookings.scheduled_start)::date)
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=51
+        ->  HashAggregate  (cost=384.32..466.13 rows=5454 width=36) (actual time=1.079..1.096 rows=30.00 loops=1)
+              Group Key: (bookings.scheduled_start)::date
+              Batches: 1  Memory Usage: 169kB
+              Buffers: shared hit=48
+              ->  Index Only Scan using ix_bookings_completed_start on bookings  (cost=0.42..332.34 rows=6930 width=12) (actual time=0.028..0.543 rows=7111.00 loops=1)
+                    Index Cond: ((scheduled_start >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=48
+Planning:
+  Buffers: shared hit=458
+Planning Time: 0.553 ms
+Execution Time: 1.149 ms
+=== R20 run 3 ===
+WindowAgg  (cost=804.65..900.08 rows=5454 width=68) (actual time=1.104..1.111 rows=30.00 loops=1)
+  Window: w1 AS (ORDER BY ((bookings.scheduled_start)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=51
+  ->  Sort  (cost=804.63..818.27 rows=5454 width=36) (actual time=1.100..1.101 rows=30.00 loops=1)
+        Sort Key: ((bookings.scheduled_start)::date)
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=51
+        ->  HashAggregate  (cost=384.32..466.13 rows=5454 width=36) (actual time=1.078..1.094 rows=30.00 loops=1)
+              Group Key: (bookings.scheduled_start)::date
+              Batches: 1  Memory Usage: 169kB
+              Buffers: shared hit=48
+              ->  Index Only Scan using ix_bookings_completed_start on bookings  (cost=0.42..332.34 rows=6930 width=12) (actual time=0.024..0.548 rows=7111.00 loops=1)
+                    Index Cond: ((scheduled_start >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=48
+Planning:
+  Buffers: shared hit=458
+Planning Time: 0.621 ms
+Execution Time: 1.155 ms
+=== R20 run 4 ===
+WindowAgg  (cost=804.65..900.08 rows=5454 width=68) (actual time=1.107..1.114 rows=30.00 loops=1)
+  Window: w1 AS (ORDER BY ((bookings.scheduled_start)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=51
+  ->  Sort  (cost=804.63..818.27 rows=5454 width=36) (actual time=1.104..1.104 rows=30.00 loops=1)
+        Sort Key: ((bookings.scheduled_start)::date)
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=51
+        ->  HashAggregate  (cost=384.32..466.13 rows=5454 width=36) (actual time=1.081..1.098 rows=30.00 loops=1)
+              Group Key: (bookings.scheduled_start)::date
+              Batches: 1  Memory Usage: 169kB
+              Buffers: shared hit=48
+              ->  Index Only Scan using ix_bookings_completed_start on bookings  (cost=0.42..332.34 rows=6930 width=12) (actual time=0.037..0.549 rows=7111.00 loops=1)
+                    Index Cond: ((scheduled_start >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=48
+Planning:
+  Buffers: shared hit=458
+Planning Time: 0.550 ms
+Execution Time: 1.149 ms
+=== R20 run 5 ===
+WindowAgg  (cost=804.65..900.08 rows=5454 width=68) (actual time=1.100..1.107 rows=30.00 loops=1)
+  Window: w1 AS (ORDER BY ((bookings.scheduled_start)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=51
+  ->  Sort  (cost=804.63..818.27 rows=5454 width=36) (actual time=1.096..1.097 rows=30.00 loops=1)
+        Sort Key: ((bookings.scheduled_start)::date)
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=51
+        ->  HashAggregate  (cost=384.32..466.13 rows=5454 width=36) (actual time=1.074..1.090 rows=30.00 loops=1)
+              Group Key: (bookings.scheduled_start)::date
+              Batches: 1  Memory Usage: 169kB
+              Buffers: shared hit=48
+              ->  Index Only Scan using ix_bookings_completed_start on bookings  (cost=0.42..332.34 rows=6930 width=12) (actual time=0.025..0.541 rows=7111.00 loops=1)
+                    Index Cond: ((scheduled_start >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=48
+Planning:
+  Buffers: shared hit=458
+Planning Time: 0.565 ms
+Execution Time: 1.143 ms

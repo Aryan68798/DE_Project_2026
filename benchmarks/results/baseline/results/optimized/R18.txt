@@ -1,0 +1,60 @@
+=== R18 run 1 ===
+Limit  (cost=0.42..21.10 rows=50 width=44) (actual time=0.010..0.168 rows=50.00 loops=1)
+  Buffers: shared hit=464
+  ->  Index Scan Backward using ix_reviews_created on reviews r  (cost=0.42..3146.46 rows=7605 width=44) (actual time=0.010..0.165 rows=50.00 loops=1)
+        Filter: (comment ~~* '%late%'::text)
+        Rows Removed by Filter: 529
+        Index Searches: 1
+        Buffers: shared hit=464
+Planning:
+  Buffers: shared hit=107
+Planning Time: 0.200 ms
+Execution Time: 0.178 ms
+=== R18 run 2 ===
+Limit  (cost=0.42..21.10 rows=50 width=44) (actual time=0.010..0.159 rows=50.00 loops=1)
+  Buffers: shared hit=464
+  ->  Index Scan Backward using ix_reviews_created on reviews r  (cost=0.42..3146.46 rows=7605 width=44) (actual time=0.009..0.156 rows=50.00 loops=1)
+        Filter: (comment ~~* '%late%'::text)
+        Rows Removed by Filter: 529
+        Index Searches: 1
+        Buffers: shared hit=464
+Planning:
+  Buffers: shared hit=107
+Planning Time: 0.179 ms
+Execution Time: 0.169 ms
+=== R18 run 3 ===
+Limit  (cost=0.42..21.10 rows=50 width=44) (actual time=0.009..0.155 rows=50.00 loops=1)
+  Buffers: shared hit=464
+  ->  Index Scan Backward using ix_reviews_created on reviews r  (cost=0.42..3146.46 rows=7605 width=44) (actual time=0.008..0.153 rows=50.00 loops=1)
+        Filter: (comment ~~* '%late%'::text)
+        Rows Removed by Filter: 529
+        Index Searches: 1
+        Buffers: shared hit=464
+Planning:
+  Buffers: shared hit=107
+Planning Time: 0.174 ms
+Execution Time: 0.164 ms
+=== R18 run 4 ===
+Limit  (cost=0.42..21.10 rows=50 width=44) (actual time=0.009..0.155 rows=50.00 loops=1)
+  Buffers: shared hit=464
+  ->  Index Scan Backward using ix_reviews_created on reviews r  (cost=0.42..3146.46 rows=7605 width=44) (actual time=0.009..0.154 rows=50.00 loops=1)
+        Filter: (comment ~~* '%late%'::text)
+        Rows Removed by Filter: 529
+        Index Searches: 1
+        Buffers: shared hit=464
+Planning:
+  Buffers: shared hit=107
+Planning Time: 0.171 ms
+Execution Time: 0.165 ms
+=== R18 run 5 ===
+Limit  (cost=0.42..21.10 rows=50 width=44) (actual time=0.010..0.158 rows=50.00 loops=1)
+  Buffers: shared hit=464
+  ->  Index Scan Backward using ix_reviews_created on reviews r  (cost=0.42..3146.46 rows=7605 width=44) (actual time=0.010..0.156 rows=50.00 loops=1)
+        Filter: (comment ~~* '%late%'::text)
+        Rows Removed by Filter: 529
+        Index Searches: 1
+        Buffers: shared hit=464
+Planning:
+  Buffers: shared hit=107
+Planning Time: 0.186 ms
+Execution Time: 0.168 ms
