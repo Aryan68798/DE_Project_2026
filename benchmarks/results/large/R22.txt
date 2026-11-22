@@ -1,0 +1,33 @@
+=== R22 run 1 ===
+Limit  (cost=4424.20..4425.31 rows=25 width=35) (actual time=7.422..7.424 rows=25.00 loops=1)
+  Buffers: shared hit=1 read=896
+  ->  Index Only Scan using ix_bookings_booked_desc on bookings  (cost=0.43..132748.13 rows=3000780 width=35) (actual time=0.032..5.689 rows=100025.00 loops=1)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=1 read=896
+Planning:
+  Buffers: shared hit=381
+Planning Time: 0.561 ms
+Execution Time: 7.435 ms
+=== R22 run 2 ===
+Limit  (cost=4424.20..4425.31 rows=25 width=35) (actual time=6.174..6.176 rows=25.00 loops=1)
+  Buffers: shared hit=897
+  ->  Index Only Scan using ix_bookings_booked_desc on bookings  (cost=0.43..132748.13 rows=3000780 width=35) (actual time=0.025..4.464 rows=100025.00 loops=1)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=897
+Planning:
+  Buffers: shared hit=381
+Planning Time: 0.506 ms
+Execution Time: 6.187 ms
+=== R22 run 3 ===
+Limit  (cost=4424.20..4425.31 rows=25 width=35) (actual time=6.034..6.036 rows=25.00 loops=1)
+  Buffers: shared hit=897
+  ->  Index Only Scan using ix_bookings_booked_desc on bookings  (cost=0.43..132748.13 rows=3000780 width=35) (actual time=0.024..4.355 rows=100025.00 loops=1)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=897
+Planning:
+  Buffers: shared hit=381
+Planning Time: 0.529 ms
+Execution Time: 6.045 ms

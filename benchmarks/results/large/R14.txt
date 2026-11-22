@@ -1,0 +1,102 @@
+=== R14 run 1 ===
+Finalize GroupAggregate  (cost=47497.39..93596.17 rows=131770 width=76) (actual time=123.070..159.744 rows=840.00 loops=1)
+  Group Key: s.category_id, (EXTRACT(isodow FROM b.scheduled_start)), (EXTRACT(hour FROM b.scheduled_start))
+  Buffers: shared hit=134 read=3403 written=3196, temp read=1413 written=1418
+  ->  Gather Merge  (cost=47497.39..88457.14 rows=316248 width=76) (actual time=123.022..159.499 rows=2520.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=134 read=3403 written=3196, temp read=1413 written=1418
+        ->  Partial GroupAggregate  (cost=46497.36..50954.25 rows=131770 width=76) (actual time=105.244..137.579 rows=840.00 loops=3)
+              Group Key: s.category_id, (EXTRACT(isodow FROM b.scheduled_start)), (EXTRACT(hour FROM b.scheduled_start))
+              Buffers: shared hit=134 read=3403 written=3196, temp read=1413 written=1418
+              ->  Sort  (cost=46497.36..46993.43 rows=198427 width=68) (actual time=105.198..126.291 rows=160040.00 loops=3)
+                    Sort Key: s.category_id, (EXTRACT(isodow FROM b.scheduled_start)), (EXTRACT(hour FROM b.scheduled_start))
+                    Sort Method: external merge  Disk: 3888kB
+                    Buffers: shared hit=134 read=3403 written=3196, temp read=1413 written=1418
+                    Worker 0:  Sort Method: external merge  Disk: 3440kB
+                    Worker 1:  Sort Method: external merge  Disk: 3976kB
+                    ->  Hash Join  (cost=2.78..20896.52 rows=198427 width=68) (actual time=0.075..43.734 rows=160040.00 loops=3)
+                          Hash Cond: (b.service_id = s.service_id)
+                          Buffers: shared hit=106 read=3403 written=3196
+                          ->  Parallel Index Only Scan using ix_bookings_city_booked on bookings b  (cost=0.43..19344.38 rows=198427 width=12) (actual time=0.039..15.749 rows=160040.00 loops=3)
+                                Index Cond: (city_id = 1)
+                                Heap Fetches: 0
+                                Index Searches: 1
+                                Buffers: shared hit=63 read=3403 written=3196
+                          ->  Hash  (cost=1.60..1.60 rows=60 width=8) (actual time=0.028..0.028 rows=60.00 loops=3)
+                                Buckets: 1024  Batches: 1  Memory Usage: 11kB
+                                Buffers: shared hit=43
+                                ->  Seq Scan on services s  (cost=0.00..1.60 rows=60 width=8) (actual time=0.022..0.024 rows=60.00 loops=3)
+                                      Buffers: shared hit=43
+Planning:
+  Buffers: shared hit=450
+Planning Time: 0.616 ms
+Execution Time: 160.492 ms
+=== R14 run 2 ===
+Finalize GroupAggregate  (cost=47497.39..93596.17 rows=131770 width=76) (actual time=107.937..141.376 rows=840.00 loops=1)
+  Group Key: s.category_id, (EXTRACT(isodow FROM b.scheduled_start)), (EXTRACT(hour FROM b.scheduled_start))
+  Buffers: shared hit=3537, temp read=1412 written=1418
+  ->  Gather Merge  (cost=47497.39..88457.14 rows=316248 width=76) (actual time=107.891..141.125 rows=2520.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=3537, temp read=1412 written=1418
+        ->  Partial GroupAggregate  (cost=46497.36..50954.25 rows=131770 width=76) (actual time=90.864..123.665 rows=840.00 loops=3)
+              Group Key: s.category_id, (EXTRACT(isodow FROM b.scheduled_start)), (EXTRACT(hour FROM b.scheduled_start))
+              Buffers: shared hit=3537, temp read=1412 written=1418
+              ->  Sort  (cost=46497.36..46993.43 rows=198427 width=68) (actual time=90.820..112.666 rows=160040.00 loops=3)
+                    Sort Key: s.category_id, (EXTRACT(isodow FROM b.scheduled_start)), (EXTRACT(hour FROM b.scheduled_start))
+                    Sort Method: external merge  Disk: 3464kB
+                    Buffers: shared hit=3537, temp read=1412 written=1418
+                    Worker 0:  Sort Method: external merge  Disk: 3952kB
+                    Worker 1:  Sort Method: external merge  Disk: 3880kB
+                    ->  Hash Join  (cost=2.78..20896.52 rows=198427 width=68) (actual time=0.060..34.582 rows=160040.00 loops=3)
+                          Hash Cond: (b.service_id = s.service_id)
+                          Buffers: shared hit=3509
+                          ->  Parallel Index Only Scan using ix_bookings_city_booked on bookings b  (cost=0.43..19344.38 rows=198427 width=12) (actual time=0.024..7.517 rows=160040.00 loops=3)
+                                Index Cond: (city_id = 1)
+                                Heap Fetches: 0
+                                Index Searches: 1
+                                Buffers: shared hit=3466
+                          ->  Hash  (cost=1.60..1.60 rows=60 width=8) (actual time=0.028..0.028 rows=60.00 loops=3)
+                                Buckets: 1024  Batches: 1  Memory Usage: 11kB
+                                Buffers: shared hit=43
+                                ->  Seq Scan on services s  (cost=0.00..1.60 rows=60 width=8) (actual time=0.021..0.023 rows=60.00 loops=3)
+                                      Buffers: shared hit=43
+Planning:
+  Buffers: shared hit=450
+Planning Time: 0.653 ms
+Execution Time: 142.047 ms
+=== R14 run 3 ===
+Finalize GroupAggregate  (cost=47497.39..93596.17 rows=131770 width=76) (actual time=110.031..146.297 rows=840.00 loops=1)
+  Group Key: s.category_id, (EXTRACT(isodow FROM b.scheduled_start)), (EXTRACT(hour FROM b.scheduled_start))
+  Buffers: shared hit=3537, temp read=1413 written=1419
+  ->  Gather Merge  (cost=47497.39..88457.14 rows=316248 width=76) (actual time=109.981..146.035 rows=2520.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=3537, temp read=1413 written=1419
+        ->  Partial GroupAggregate  (cost=46497.36..50954.25 rows=131770 width=76) (actual time=93.677..128.994 rows=840.00 loops=3)
+              Group Key: s.category_id, (EXTRACT(isodow FROM b.scheduled_start)), (EXTRACT(hour FROM b.scheduled_start))
+              Buffers: shared hit=3537, temp read=1413 written=1419
+              ->  Sort  (cost=46497.36..46993.43 rows=198427 width=68) (actual time=93.629..117.035 rows=160040.00 loops=3)
+                    Sort Key: s.category_id, (EXTRACT(isodow FROM b.scheduled_start)), (EXTRACT(hour FROM b.scheduled_start))
+                    Sort Method: external merge  Disk: 3784kB
+                    Buffers: shared hit=3537, temp read=1413 written=1419
+                    Worker 0:  Sort Method: external merge  Disk: 3584kB
+                    Worker 1:  Sort Method: external merge  Disk: 3936kB
+                    ->  Hash Join  (cost=2.78..20896.52 rows=198427 width=68) (actual time=0.060..34.773 rows=160040.00 loops=3)
+                          Hash Cond: (b.service_id = s.service_id)
+                          Buffers: shared hit=3509
+                          ->  Parallel Index Only Scan using ix_bookings_city_booked on bookings b  (cost=0.43..19344.38 rows=198427 width=12) (actual time=0.023..7.553 rows=160040.00 loops=3)
+                                Index Cond: (city_id = 1)
+                                Heap Fetches: 0
+                                Index Searches: 1
+                                Buffers: shared hit=3466
+                          ->  Hash  (cost=1.60..1.60 rows=60 width=8) (actual time=0.028..0.028 rows=60.00 loops=3)
+                                Buckets: 1024  Batches: 1  Memory Usage: 11kB
+                                Buffers: shared hit=43
+                                ->  Seq Scan on services s  (cost=0.00..1.60 rows=60 width=8) (actual time=0.021..0.024 rows=60.00 loops=3)
+                                      Buffers: shared hit=43
+Planning:
+  Buffers: shared hit=450
+Planning Time: 0.618 ms
+Execution Time: 147.031 ms

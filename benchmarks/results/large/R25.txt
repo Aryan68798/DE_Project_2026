@@ -1,0 +1,156 @@
+=== R25 run 1 ===
+Limit  (cost=216889.96..216890.04 rows=30 width=68) (actual time=46.572..46.586 rows=30.00 loops=1)
+  Buffers: shared hit=20734 read=11063
+  ->  Sort  (cost=216889.96..216995.32 rows=42143 width=68) (actual time=46.571..46.585 rows=30.00 loops=1)
+        Sort Key: (COALESCE((SubPlan 1), '0'::numeric)) DESC
+        Sort Method: top-N heapsort  Memory: 26kB
+        Buffers: shared hit=20734 read=11063
+        ->  GroupAggregate  (cost=20988.19..215645.29 rows=42143 width=68) (actual time=20.441..45.913 rows=7073.00 loops=1)
+              Group Key: a.pro_id
+              Buffers: shared hit=20731 read=11063
+              ->  Gather Merge  (cost=20988.19..25896.44 rows=42143 width=20) (actual time=20.337..22.571 rows=42438.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=1633 read=8902
+                    ->  Sort  (cost=19988.16..20032.06 rows=17560 width=20) (actual time=18.771..19.057 rows=14146.00 loops=3)
+                          Sort Key: a.pro_id
+                          Sort Method: quicksort  Memory: 964kB
+                          Buffers: shared hit=1633 read=8902
+                          Worker 0:  Sort Method: quicksort  Memory: 917kB
+                          Worker 1:  Sort Method: quicksort  Memory: 930kB
+                          ->  Hash Join  (cost=823.23..18750.18 rows=17560 width=20) (actual time=1.193..18.132 rows=14146.00 loops=3)
+                                Hash Cond: (a.pro_id = p.pro_id)
+                                Buffers: shared hit=1619 read=8902
+                                ->  Parallel Seq Scan on pro_availability a  (cost=0.00..17636.56 rows=110618 width=20) (actual time=0.034..13.126 rows=88128.00 loops=3)
+                                      Filter: ((work_date >= '2026-06-22'::date) AND (work_date <= '2026-06-28'::date))
+                                      Rows Removed by Filter: 377715
+                                      Buffers: shared read=8902
+                                ->  Hash  (cost=724.01..724.01 rows=7937 width=4) (actual time=1.145..1.145 rows=8000.00 loops=3)
+                                      Buckets: 8192  Batches: 1  Memory Usage: 346kB
+                                      Buffers: shared hit=1619
+                                      ->  Bitmap Heap Scan on professionals p  (cost=93.80..724.01 rows=7937 width=4) (actual time=0.143..0.837 rows=8000.00 loops=3)
+                                            Recheck Cond: (city_id = 1)
+                                            Heap Blocks: exact=531
+                                            Buffers: shared hit=1619
+                                            ->  Bitmap Index Scan on ix_professionals_city_status  (cost=0.00..91.82 rows=7937 width=0) (actual time=0.097..0.097 rows=8000.00 loops=3)
+                                                  Index Cond: (city_id = 1)
+                                                  Index Searches: 3
+                                                  Buffers: shared hit=26
+              SubPlan 1
+                ->  Aggregate  (cost=4.47..4.48 rows=1 width=32) (actual time=0.002..0.002 rows=1.00 loops=7073)
+                      Buffers: shared hit=19098 read=2161
+                      ->  Index Only Scan using ix_bookings_pro_start on bookings b  (cost=0.43..4.46 rows=1 width=16) (actual time=0.002..0.002 rows=0.73 loops=7073)
+                            Index Cond: ((pro_id = a.pro_id) AND (scheduled_start >= '2026-06-22 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-06-29 00:00:00+05:30'::timestamp with time zone))
+                            Filter: ((status)::text = 'COMPLETED'::text)
+                            Rows Removed by Filter: 0
+                            Heap Fetches: 0
+                            Index Searches: 7073
+                            Buffers: shared hit=19098 read=2161
+Planning:
+  Buffers: shared hit=566 read=14
+Planning Time: 0.905 ms
+Execution Time: 46.629 ms
+=== R25 run 2 ===
+Limit  (cost=216889.96..216890.04 rows=30 width=68) (actual time=43.026..43.041 rows=30.00 loops=1)
+  Buffers: shared hit=23177 read=8620
+  ->  Sort  (cost=216889.96..216995.32 rows=42143 width=68) (actual time=43.025..43.039 rows=30.00 loops=1)
+        Sort Key: (COALESCE((SubPlan 1), '0'::numeric)) DESC
+        Sort Method: top-N heapsort  Memory: 26kB
+        Buffers: shared hit=23177 read=8620
+        ->  GroupAggregate  (cost=20988.19..215645.29 rows=42143 width=68) (actual time=20.441..42.499 rows=7073.00 loops=1)
+              Group Key: a.pro_id
+              Buffers: shared hit=23174 read=8620
+              ->  Gather Merge  (cost=20988.19..25896.44 rows=42143 width=20) (actual time=20.348..22.505 rows=42438.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=1915 read=8620
+                    ->  Sort  (cost=19988.16..20032.06 rows=17560 width=20) (actual time=18.821..19.114 rows=14146.00 loops=3)
+                          Sort Key: a.pro_id
+                          Sort Method: quicksort  Memory: 981kB
+                          Buffers: shared hit=1915 read=8620
+                          Worker 0:  Sort Method: quicksort  Memory: 923kB
+                          Worker 1:  Sort Method: quicksort  Memory: 907kB
+                          ->  Hash Join  (cost=823.23..18750.18 rows=17560 width=20) (actual time=1.165..18.182 rows=14146.00 loops=3)
+                                Hash Cond: (a.pro_id = p.pro_id)
+                                Buffers: shared hit=1901 read=8620
+                                ->  Parallel Seq Scan on pro_availability a  (cost=0.00..17636.56 rows=110618 width=20) (actual time=0.036..13.212 rows=88128.00 loops=3)
+                                      Filter: ((work_date >= '2026-06-22'::date) AND (work_date <= '2026-06-28'::date))
+                                      Rows Removed by Filter: 377715
+                                      Buffers: shared hit=282 read=8620
+                                ->  Hash  (cost=724.01..724.01 rows=7937 width=4) (actual time=1.120..1.121 rows=8000.00 loops=3)
+                                      Buckets: 8192  Batches: 1  Memory Usage: 346kB
+                                      Buffers: shared hit=1619
+                                      ->  Bitmap Heap Scan on professionals p  (cost=93.80..724.01 rows=7937 width=4) (actual time=0.143..0.817 rows=8000.00 loops=3)
+                                            Recheck Cond: (city_id = 1)
+                                            Heap Blocks: exact=531
+                                            Buffers: shared hit=1619
+                                            ->  Bitmap Index Scan on ix_professionals_city_status  (cost=0.00..91.82 rows=7937 width=0) (actual time=0.101..0.101 rows=8000.00 loops=3)
+                                                  Index Cond: (city_id = 1)
+                                                  Index Searches: 3
+                                                  Buffers: shared hit=26
+              SubPlan 1
+                ->  Aggregate  (cost=4.47..4.48 rows=1 width=32) (actual time=0.002..0.002 rows=1.00 loops=7073)
+                      Buffers: shared hit=21259
+                      ->  Index Only Scan using ix_bookings_pro_start on bookings b  (cost=0.43..4.46 rows=1 width=16) (actual time=0.002..0.002 rows=0.73 loops=7073)
+                            Index Cond: ((pro_id = a.pro_id) AND (scheduled_start >= '2026-06-22 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-06-29 00:00:00+05:30'::timestamp with time zone))
+                            Filter: ((status)::text = 'COMPLETED'::text)
+                            Rows Removed by Filter: 0
+                            Heap Fetches: 0
+                            Index Searches: 7073
+                            Buffers: shared hit=21259
+Planning:
+  Buffers: shared hit=580
+Planning Time: 0.843 ms
+Execution Time: 43.083 ms
+=== R25 run 3 ===
+Limit  (cost=216889.96..216890.04 rows=30 width=68) (actual time=44.216..44.231 rows=30.00 loops=1)
+  Buffers: shared hit=23459 read=8338
+  ->  Sort  (cost=216889.96..216995.32 rows=42143 width=68) (actual time=44.215..44.229 rows=30.00 loops=1)
+        Sort Key: (COALESCE((SubPlan 1), '0'::numeric)) DESC
+        Sort Method: top-N heapsort  Memory: 26kB
+        Buffers: shared hit=23459 read=8338
+        ->  GroupAggregate  (cost=20988.19..215645.29 rows=42143 width=68) (actual time=21.155..43.651 rows=7073.00 loops=1)
+              Group Key: a.pro_id
+              Buffers: shared hit=23456 read=8338
+              ->  Gather Merge  (cost=20988.19..25896.44 rows=42143 width=20) (actual time=21.062..23.272 rows=42438.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=2197 read=8338
+                    ->  Sort  (cost=19988.16..20032.06 rows=17560 width=20) (actual time=19.530..19.820 rows=14146.00 loops=3)
+                          Sort Key: a.pro_id
+                          Sort Method: quicksort  Memory: 997kB
+                          Buffers: shared hit=2197 read=8338
+                          Worker 0:  Sort Method: quicksort  Memory: 898kB
+                          Worker 1:  Sort Method: quicksort  Memory: 916kB
+                          ->  Hash Join  (cost=823.23..18750.18 rows=17560 width=20) (actual time=1.188..18.888 rows=14146.00 loops=3)
+                                Hash Cond: (a.pro_id = p.pro_id)
+                                Buffers: shared hit=2183 read=8338
+                                ->  Parallel Seq Scan on pro_availability a  (cost=0.00..17636.56 rows=110618 width=20) (actual time=0.038..13.804 rows=88128.00 loops=3)
+                                      Filter: ((work_date >= '2026-06-22'::date) AND (work_date <= '2026-06-28'::date))
+                                      Rows Removed by Filter: 377715
+                                      Buffers: shared hit=564 read=8338
+                                ->  Hash  (cost=724.01..724.01 rows=7937 width=4) (actual time=1.138..1.138 rows=8000.00 loops=3)
+                                      Buckets: 8192  Batches: 1  Memory Usage: 346kB
+                                      Buffers: shared hit=1619
+                                      ->  Bitmap Heap Scan on professionals p  (cost=93.80..724.01 rows=7937 width=4) (actual time=0.137..0.818 rows=8000.00 loops=3)
+                                            Recheck Cond: (city_id = 1)
+                                            Heap Blocks: exact=531
+                                            Buffers: shared hit=1619
+                                            ->  Bitmap Index Scan on ix_professionals_city_status  (cost=0.00..91.82 rows=7937 width=0) (actual time=0.096..0.096 rows=8000.00 loops=3)
+                                                  Index Cond: (city_id = 1)
+                                                  Index Searches: 3
+                                                  Buffers: shared hit=26
+              SubPlan 1
+                ->  Aggregate  (cost=4.47..4.48 rows=1 width=32) (actual time=0.002..0.002 rows=1.00 loops=7073)
+                      Buffers: shared hit=21259
+                      ->  Index Only Scan using ix_bookings_pro_start on bookings b  (cost=0.43..4.46 rows=1 width=16) (actual time=0.002..0.002 rows=0.73 loops=7073)
+                            Index Cond: ((pro_id = a.pro_id) AND (scheduled_start >= '2026-06-22 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-06-29 00:00:00+05:30'::timestamp with time zone))
+                            Filter: ((status)::text = 'COMPLETED'::text)
+                            Rows Removed by Filter: 0
+                            Heap Fetches: 0
+                            Index Searches: 7073
+                            Buffers: shared hit=21259
+Planning:
+  Buffers: shared hit=580
+Planning Time: 0.841 ms
+Execution Time: 44.275 ms

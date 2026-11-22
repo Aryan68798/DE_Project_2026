@@ -1,0 +1,54 @@
+=== R24 run 1 ===
+Sort  (cost=1903.44..1930.63 rows=10879 width=48) (actual time=3.513..3.513 rows=7.00 loops=1)
+  Sort Key: (date_trunc('month'::text, scheduled_start))
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=4 read=95
+  ->  HashAggregate  (cost=1010.86..1174.04 rows=10879 width=48) (actual time=3.474..3.507 rows=7.00 loops=1)
+        Group Key: date_trunc('month'::text, scheduled_start)
+        Batches: 1  Memory Usage: 289kB
+        Buffers: shared hit=1 read=95
+        ->  Index Only Scan using ix_bookings_fee_start on bookings  (cost=0.42..838.92 rows=22925 width=11) (actual time=0.032..2.078 rows=23940.00 loops=1)
+              Index Cond: (scheduled_start >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=1 read=95
+Planning:
+  Buffers: shared hit=418 read=1
+Planning Time: 0.560 ms
+Execution Time: 3.560 ms
+=== R24 run 2 ===
+Sort  (cost=1903.44..1930.63 rows=10879 width=48) (actual time=3.372..3.373 rows=7.00 loops=1)
+  Sort Key: (date_trunc('month'::text, scheduled_start))
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=99
+  ->  HashAggregate  (cost=1010.86..1174.04 rows=10879 width=48) (actual time=3.339..3.368 rows=7.00 loops=1)
+        Group Key: date_trunc('month'::text, scheduled_start)
+        Batches: 1  Memory Usage: 289kB
+        Buffers: shared hit=96
+        ->  Index Only Scan using ix_bookings_fee_start on bookings  (cost=0.42..838.92 rows=22925 width=11) (actual time=0.025..2.004 rows=23940.00 loops=1)
+              Index Cond: (scheduled_start >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=96
+Planning:
+  Buffers: shared hit=419
+Planning Time: 0.532 ms
+Execution Time: 3.415 ms
+=== R24 run 3 ===
+Sort  (cost=1903.44..1930.63 rows=10879 width=48) (actual time=3.318..3.319 rows=7.00 loops=1)
+  Sort Key: (date_trunc('month'::text, scheduled_start))
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=99
+  ->  HashAggregate  (cost=1010.86..1174.04 rows=10879 width=48) (actual time=3.282..3.313 rows=7.00 loops=1)
+        Group Key: date_trunc('month'::text, scheduled_start)
+        Batches: 1  Memory Usage: 289kB
+        Buffers: shared hit=96
+        ->  Index Only Scan using ix_bookings_fee_start on bookings  (cost=0.42..838.92 rows=22925 width=11) (actual time=0.026..1.981 rows=23940.00 loops=1)
+              Index Cond: (scheduled_start >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=96
+Planning:
+  Buffers: shared hit=419
+Planning Time: 0.542 ms
+Execution Time: 3.362 ms

@@ -1,0 +1,60 @@
+=== R16 run 1 ===
+Limit  (cost=1507.92..1507.94 rows=10 width=15) (actual time=3.023..3.024 rows=10.00 loops=1)
+  Buffers: shared hit=60 read=163 written=63
+  ->  Sort  (cost=1507.92..1508.17 rows=100 width=15) (actual time=3.022..3.023 rows=10.00 loops=1)
+        Sort Key: (count(*)) DESC
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=60 read=163 written=63
+        ->  HashAggregate  (cost=1504.76..1505.76 rows=100 width=15) (actual time=3.012..3.013 rows=16.00 loops=1)
+              Group Key: pincode
+              Batches: 1  Memory Usage: 32kB
+              Buffers: shared hit=57 read=163 written=63
+              ->  Index Only Scan using ix_bookings_city_booked on bookings  (cost=0.43..1371.61 rows=26630 width=7) (actual time=0.019..1.584 rows=26486.00 loops=1)
+                    Index Cond: ((city_id = 2) AND (booked_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (booked_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=57 read=163 written=63
+Planning:
+  Buffers: shared hit=433
+Planning Time: 0.630 ms
+Execution Time: 3.052 ms
+=== R16 run 2 ===
+Limit  (cost=1507.92..1507.94 rows=10 width=15) (actual time=2.544..2.544 rows=10.00 loops=1)
+  Buffers: shared hit=223
+  ->  Sort  (cost=1507.92..1508.17 rows=100 width=15) (actual time=2.543..2.543 rows=10.00 loops=1)
+        Sort Key: (count(*)) DESC
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=223
+        ->  HashAggregate  (cost=1504.76..1505.76 rows=100 width=15) (actual time=2.532..2.533 rows=16.00 loops=1)
+              Group Key: pincode
+              Batches: 1  Memory Usage: 32kB
+              Buffers: shared hit=220
+              ->  Index Only Scan using ix_bookings_city_booked on bookings  (cost=0.43..1371.61 rows=26630 width=7) (actual time=0.011..1.172 rows=26486.00 loops=1)
+                    Index Cond: ((city_id = 2) AND (booked_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (booked_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=220
+Planning:
+  Buffers: shared hit=433
+Planning Time: 0.658 ms
+Execution Time: 2.579 ms
+=== R16 run 3 ===
+Limit  (cost=1507.92..1507.94 rows=10 width=15) (actual time=2.454..2.454 rows=10.00 loops=1)
+  Buffers: shared hit=223
+  ->  Sort  (cost=1507.92..1508.17 rows=100 width=15) (actual time=2.453..2.453 rows=10.00 loops=1)
+        Sort Key: (count(*)) DESC
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=223
+        ->  HashAggregate  (cost=1504.76..1505.76 rows=100 width=15) (actual time=2.444..2.445 rows=16.00 loops=1)
+              Group Key: pincode
+              Batches: 1  Memory Usage: 32kB
+              Buffers: shared hit=220
+              ->  Index Only Scan using ix_bookings_city_booked on bookings  (cost=0.43..1371.61 rows=26630 width=7) (actual time=0.009..1.124 rows=26486.00 loops=1)
+                    Index Cond: ((city_id = 2) AND (booked_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (booked_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=220
+Planning:
+  Buffers: shared hit=433
+Planning Time: 0.568 ms
+Execution Time: 2.480 ms

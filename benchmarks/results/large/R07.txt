@@ -1,0 +1,39 @@
+=== R07 run 1 ===
+Aggregate  (cost=4.47..4.48 rows=1 width=72) (actual time=0.036..0.037 rows=1.00 loops=1)
+  Buffers: shared hit=3 read=1
+  ->  Index Only Scan using ix_bookings_pro_completed on bookings  (cost=0.43..4.46 rows=1 width=13) (actual time=0.029..0.029 rows=2.00 loops=1)
+        Index Cond: ((pro_id = 425) AND (completed_at >= '2026-06-22 00:00:00+05:30'::timestamp with time zone) AND (completed_at < '2026-06-29 00:00:00+05:30'::timestamp with time zone))
+        Filter: ((status)::text = 'COMPLETED'::text)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=3 read=1
+Planning:
+  Buffers: shared hit=404 read=2
+Planning Time: 0.587 ms
+Execution Time: 0.056 ms
+=== R07 run 2 ===
+Aggregate  (cost=4.47..4.48 rows=1 width=72) (actual time=0.032..0.032 rows=1.00 loops=1)
+  Buffers: shared hit=4
+  ->  Index Only Scan using ix_bookings_pro_completed on bookings  (cost=0.43..4.46 rows=1 width=13) (actual time=0.025..0.025 rows=2.00 loops=1)
+        Index Cond: ((pro_id = 425) AND (completed_at >= '2026-06-22 00:00:00+05:30'::timestamp with time zone) AND (completed_at < '2026-06-29 00:00:00+05:30'::timestamp with time zone))
+        Filter: ((status)::text = 'COMPLETED'::text)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=406
+Planning Time: 0.550 ms
+Execution Time: 0.049 ms
+=== R07 run 3 ===
+Aggregate  (cost=4.47..4.48 rows=1 width=72) (actual time=0.031..0.032 rows=1.00 loops=1)
+  Buffers: shared hit=4
+  ->  Index Only Scan using ix_bookings_pro_completed on bookings  (cost=0.43..4.46 rows=1 width=13) (actual time=0.025..0.025 rows=2.00 loops=1)
+        Index Cond: ((pro_id = 425) AND (completed_at >= '2026-06-22 00:00:00+05:30'::timestamp with time zone) AND (completed_at < '2026-06-29 00:00:00+05:30'::timestamp with time zone))
+        Filter: ((status)::text = 'COMPLETED'::text)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=406
+Planning Time: 0.573 ms
+Execution Time: 0.049 ms

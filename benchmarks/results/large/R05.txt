@@ -1,0 +1,27 @@
+=== R05 run 1 ===
+Index Scan using ix_bookings_requested_start on bookings  (cost=0.28..88.15 rows=1395 width=24) (actual time=0.017..0.460 rows=864.00 loops=1)
+  Index Cond: (scheduled_start < '2026-07-02 12:00:00+05:30'::timestamp with time zone)
+  Index Searches: 1
+  Buffers: shared hit=828 read=11
+Planning:
+  Buffers: shared hit=400
+Planning Time: 0.538 ms
+Execution Time: 0.482 ms
+=== R05 run 2 ===
+Index Scan using ix_bookings_requested_start on bookings  (cost=0.28..88.15 rows=1395 width=24) (actual time=0.007..0.446 rows=864.00 loops=1)
+  Index Cond: (scheduled_start < '2026-07-02 12:00:00+05:30'::timestamp with time zone)
+  Index Searches: 1
+  Buffers: shared hit=839
+Planning:
+  Buffers: shared hit=400
+Planning Time: 0.521 ms
+Execution Time: 0.467 ms
+=== R05 run 3 ===
+Index Scan using ix_bookings_requested_start on bookings  (cost=0.28..88.15 rows=1395 width=24) (actual time=0.007..0.419 rows=864.00 loops=1)
+  Index Cond: (scheduled_start < '2026-07-02 12:00:00+05:30'::timestamp with time zone)
+  Index Searches: 1
+  Buffers: shared hit=839
+Planning:
+  Buffers: shared hit=400
+Planning Time: 0.524 ms
+Execution Time: 0.441 ms

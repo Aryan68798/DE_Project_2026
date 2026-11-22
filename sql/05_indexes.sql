@@ -164,6 +164,15 @@ CREATE INDEX IF NOT EXISTS ix_pro_availability_date
 CREATE INDEX IF NOT EXISTS ix_professionals_city_status
     ON professionals (city_id, status);
 
+-- Phase 5 fix for R02 (slot picker, target under 5 ms). On the large data
+-- (50,000 pros) ix_professionals_city_status returned all 7,073 active
+-- Bengaluru pros, which were merge-joined with all of pro_skills and then
+-- sorted by rating just to keep 10: 6.3 ms. With rating in the index the
+-- planner walks the city's active pros best-rated first and stops after
+-- 10 matches (LIMIT 10): 0.07 ms. INCLUDE (full_name) covers the SELECT.
+CREATE INDEX IF NOT EXISTS ix_professionals_city_status_rating
+    ON professionals (city_id, status, rating DESC NULLS LAST) INCLUDE (full_name);
+
 -- Fresh statistics so the planner knows about the new indexes, and an up to
 -- date visibility map so Index Only Scans don't fall back to the table.
 VACUUM ANALYZE;

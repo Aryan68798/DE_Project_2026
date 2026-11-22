@@ -1,0 +1,63 @@
+=== R04 run 1 ===
+Sort  (cost=10.31..10.31 rows=1 width=58) (actual time=0.031..0.031 rows=0.00 loops=1)
+  Sort Key: b.scheduled_start
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=6 read=1
+  ->  Hash Join  (cost=8.46..10.30 rows=1 width=58) (actual time=0.022..0.022 rows=0.00 loops=1)
+        Hash Cond: (s.service_id = b.service_id)
+        Buffers: shared hit=3 read=1
+        ->  Seq Scan on services s  (cost=0.00..1.60 rows=60 width=20) (actual time=0.002..0.002 rows=1.00 loops=1)
+              Buffers: shared hit=1
+        ->  Hash  (cost=8.45..8.45 rows=1 width=46) (actual time=0.017..0.017 rows=0.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 8kB
+              Buffers: shared hit=2 read=1
+              ->  Index Scan using ix_bookings_pro_start on bookings b  (cost=0.43..8.45 rows=1 width=46) (actual time=0.017..0.017 rows=0.00 loops=1)
+                    Index Cond: ((pro_id = 425) AND (scheduled_start >= '2026-07-02 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-07-03 00:00:00+05:30'::timestamp with time zone))
+                    Index Searches: 1
+                    Buffers: shared hit=2 read=1
+Planning:
+  Buffers: shared hit=529
+Planning Time: 0.633 ms
+Execution Time: 0.047 ms
+=== R04 run 2 ===
+Sort  (cost=10.31..10.31 rows=1 width=58) (actual time=0.022..0.023 rows=0.00 loops=1)
+  Sort Key: b.scheduled_start
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=7
+  ->  Hash Join  (cost=8.46..10.30 rows=1 width=58) (actual time=0.012..0.012 rows=0.00 loops=1)
+        Hash Cond: (s.service_id = b.service_id)
+        Buffers: shared hit=4
+        ->  Seq Scan on services s  (cost=0.00..1.60 rows=60 width=20) (actual time=0.002..0.002 rows=1.00 loops=1)
+              Buffers: shared hit=1
+        ->  Hash  (cost=8.45..8.45 rows=1 width=46) (actual time=0.007..0.007 rows=0.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 8kB
+              Buffers: shared hit=3
+              ->  Index Scan using ix_bookings_pro_start on bookings b  (cost=0.43..8.45 rows=1 width=46) (actual time=0.006..0.006 rows=0.00 loops=1)
+                    Index Cond: ((pro_id = 425) AND (scheduled_start >= '2026-07-02 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-07-03 00:00:00+05:30'::timestamp with time zone))
+                    Index Searches: 1
+                    Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=529
+Planning Time: 0.681 ms
+Execution Time: 0.039 ms
+=== R04 run 3 ===
+Sort  (cost=10.31..10.31 rows=1 width=58) (actual time=0.022..0.022 rows=0.00 loops=1)
+  Sort Key: b.scheduled_start
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=7
+  ->  Hash Join  (cost=8.46..10.30 rows=1 width=58) (actual time=0.012..0.012 rows=0.00 loops=1)
+        Hash Cond: (s.service_id = b.service_id)
+        Buffers: shared hit=4
+        ->  Seq Scan on services s  (cost=0.00..1.60 rows=60 width=20) (actual time=0.002..0.002 rows=1.00 loops=1)
+              Buffers: shared hit=1
+        ->  Hash  (cost=8.45..8.45 rows=1 width=46) (actual time=0.007..0.007 rows=0.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 8kB
+              Buffers: shared hit=3
+              ->  Index Scan using ix_bookings_pro_start on bookings b  (cost=0.43..8.45 rows=1 width=46) (actual time=0.007..0.007 rows=0.00 loops=1)
+                    Index Cond: ((pro_id = 425) AND (scheduled_start >= '2026-07-02 00:00:00+05:30'::timestamp with time zone) AND (scheduled_start < '2026-07-03 00:00:00+05:30'::timestamp with time zone))
+                    Index Searches: 1
+                    Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=529
+Planning Time: 0.731 ms
+Execution Time: 0.040 ms
